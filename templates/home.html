@@ -1,0 +1,31 @@
+{% include 'navbar.html' %}
+{% include 'header.html' %}
+{% include 'add_recipe.html' %}
+<button type="button" name="add" id="add" class="btn btn-primary btn-sm add">Add Recipe</button>
+
+<table id="myTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for row in rows %}
+      <td>{{row.name}}</td>
+      <td>{{row.description}}</td>
+      <td>
+        <button type="button" name="edit" id="edit" row-name={{row.name}} value={{row.id}} class="btn btn-danger btn-sm edit">Edit</button>
+        <button type="button" name="delete" id="delete" value={{row.id}} class="btn btn-danger btn-sm delete">Delete</button>
+      </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% include 'edit_modal.html' %}
+
+<script>
+{% include 'scripts/scripts.js' %}
+</script>
