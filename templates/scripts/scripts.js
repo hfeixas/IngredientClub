@@ -9,7 +9,7 @@ $('#submit_recipe').submit(function( event) {
     var submit = $(this).serialize();
     console.log(submit)
         $.ajax({
-            url: '/api/add?' + $(this).serialize(),
+            url: '/recipes?' + $(this).serialize(),
             type: 'post',
             contentType: "application/json; charset=utf-8",
             success: function(result){
@@ -24,7 +24,7 @@ $('.delete').click(function( event ) {
     console.log($(this).attr("value"));
     var id = $(this).attr("value")
     $.ajax({
-        url: '/api/del?id=' + id,
+        url: '/recipes?id=' + id,
         type: 'delete',
         contentType: "application/json; charset=utf-8",
     }).done(function(data) {
@@ -34,38 +34,45 @@ $('.delete').click(function( event ) {
 
 $('.edit').click(function( event ) {
     console.log($(this).attr("value"))
-    $('#edit_modal').modal('show');
-    $('#edit-modal-id').attr("value",$(this).attr("value"));
-    $('#edit-modal-name').attr("value",$(this).attr("row-name"));
+    $('#recipe-modal').modal('show');
+    $('.modal-title').html('Edit Recipe');
+    $('.form-group').append('<input type="hidden" class="form-control" name="id" id="recipe-id"></input>');
+    $('.recipe-form').prop("class", "recipe-form-edit");
+    $('#recipe-id').attr("value",$(this).attr("value"));
+    $('#recipe-name').attr("value",$(this).attr("row-name"));
 })
 
 $('.add').click(function( event ) {
     console.log($(this).attr("value"))
-    $('#add-modal').modal('show');
+    $('#recipe-modal').modal('show');
+    $('.modal-header').html('Add Recipe');
+    $('.recipe-form').prop("class", "recipe-form-add");
  })
 
-$('#edit-modal-submit').submit(function( event) {
+
+
+$('#modal-submit-edit').submit(function( event) {
     event.preventDefault();
     var submit = $(this).serialize();
     console.log(submit)
         $.ajax({
-            url: '/api/edit?' + $(this).serialize(),
+            url: 'recipes?' + $(this).serialize(),
             type: 'put',
             contentType: "application/json; charset=utf-8",
             success: function(result){
                 location.reload();
             }
     }).fail(function(data) {
-        location.reload();
+        // location.reload();
     });
 });
 
-$('#add-modal-submit').submit(function( event) {
+$('.form').submit(function( event) {
     event.preventDefault();
     var submit = $(this).serialize();
     console.log(submit)
         $.ajax({
-            url: '/api/add?' + $(this).serialize(),
+            url: '/recipes?' + $(this).serialize(),
             type: 'post',
             contentType: "application/json; charset=utf-8",
             success: function(result){
@@ -75,3 +82,4 @@ $('#add-modal-submit').submit(function( event) {
         location.reload();
     });
 });
+

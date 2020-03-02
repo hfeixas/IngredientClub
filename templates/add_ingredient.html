@@ -1,0 +1,32 @@
+<div class="modal hide fade" tabindex="-1" role="dialog" id="add-ingredient-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Ingredient</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="add-ingredient-modal-submit">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Ingredient Name</label>
+                  <input type="text" class="form-control" name="name"></input>
+                  <label for="formGroupExampleInput">Ingredient Description</label>
+                  <input type="text" class="form-control" name="description"></input>
+                  <label for="inputcategory">Category</label>
+                  <select id="inputcategory" class="form-control">
+                    {% for category in categories %}
+                    <option selected value={{category._id}}>{{category.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <input type="submit" class="btn btn-secondary" value="Submit">
+              </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="submit" class="btn btn-secondary " data-dismiss="modal">Save</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
